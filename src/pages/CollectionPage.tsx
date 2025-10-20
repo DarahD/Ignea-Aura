@@ -12,8 +12,8 @@ const CollectionPage: React.FC = () => {
       category: 'keepsake',
       price: 1800,
       priceUSD: 170,
-      image: '/public/ignea-aura-web-pics/Products/vessel-trio-reused-drinking-glass.png',
-      description: 'The ultimate Ignea Aura experience. This curated set of three Signature Vessels is presented in a reusable bamboo puzzle box, inspired by Japanese Himitsu-bako craftsmanship. The box itself is a keepsake, designed for a lifetime of use.',
+      image: '/ignea-aura-web-pics/Products/vessel-trio-reused-drinking-glass.png',
+      description: 'The ultimate Ignea Aura experience. This curated set of three Signature Vessels is presented in a reusable bamboo puzzle box.',
       features: [
         'Three hand-poured candles in reusable rocks glasses',
         'Housed in an engraved, sustainable bamboo puzzle box',
@@ -28,7 +28,7 @@ const CollectionPage: React.FC = () => {
       category: 'round',
       price: 450,
       priceUSD: 42,
-      image: '/public/ignea-aura-web-pics/Products/onyx-round-glass.png',
+      image: '/ignea-aura-web-pics/Products/onyx-round-glass.png',
       description: 'Embodying strength and mystery, the Onyx vessel holds a flame that glows with quiet resilience.',
       features: [
         '300–400 ml (10–13.5 oz) reusable rocks glass',
@@ -46,7 +46,7 @@ const CollectionPage: React.FC = () => {
       category: 'round',
       price: 450,
       priceUSD: 42,
-      image: '/public/ignea-aura-web-pics/Products/clear-round-glass.png',
+      image: '/ignea-aura-web-pics/Products/clear-round-glass.png',
       description: 'The Crystal vessel captures the pure, untamed beauty of the flame.',
       features: [
         '300–400 ml (10–13.5 oz) reusable rocks glass',
@@ -64,7 +64,7 @@ const CollectionPage: React.FC = () => {
       category: 'round',
       price: 450,
       priceUSD: 42,
-      image: '/public/ignea-aura-web-pics/Products/pink-round-glass.png',
+      image: '/ignea-aura-web-pics/Products/pink-round-glass.png',
       description: 'Soft, modern, and inviting, the Blush vessel brings a touch of warm radiance to any space.',
       features: [
         '300–400 ml (10–13.5 oz) reusable rocks glass',
@@ -82,7 +82,7 @@ const CollectionPage: React.FC = () => {
       category: 'square',
       price: 450,
       priceUSD: 42,
-      image: '/public/ignea-aura-web-pics/Products/onyx-square-glass.png',
+      image: '/ignea-aura-web-pics/Products/onyx-square-glass.png',
       description: 'Where bold geometry meets sustainable design.',
       features: [
         '300–400 ml (10–13.5 oz) reusable rocks glass',
@@ -100,7 +100,7 @@ const CollectionPage: React.FC = () => {
       category: 'square',
       price: 450,
       priceUSD: 42,
-      image: '/public/ignea-aura-web-pics/Products/clear-square-glass.png',
+      image: '/ignea-aura-web-pics/Products/clear-square-glass.png',
       description: 'Clean lines and clarity define the Crystal square vessel.',
       features: [
         '300–400 ml (10–13.5 oz) reusable rocks glass',
@@ -118,7 +118,7 @@ const CollectionPage: React.FC = () => {
       category: 'square',
       price: 450,
       priceUSD: 42,
-      image: '/public/ignea-aura-web-pics/Products/pink-square-glass.png',
+      image: '/ignea-aura-web-pics/Products/pink-square-glass.png',
       description: 'The Blush square vessel offers a soft, contemporary edge.',
       features: [
         '300–400 ml (10–13.5 oz) reusable rocks glass',
@@ -136,7 +136,7 @@ const CollectionPage: React.FC = () => {
       category: 'refills',
       price: 280,
       priceUSD: 26,
-      image: '/public/ignea-aura-web-pics/Products/studio-lifestyle-shot.png',
+      image: '/ignea-aura-web-pics/Products/studio-lifestyle-shot.png',
       description: 'Coconut soy wax refills designed to drop directly into your Ignea Aura vessel.',
       features: [
         'Fits all vessels',
@@ -166,8 +166,7 @@ const CollectionPage: React.FC = () => {
 
   return (
     <div>
-      {/* Your render logic here */}
-      {/* This is just your data. The display part is likely further below in the file */}
+      {/* Your UI rendering logic goes here */}
     </div>
   );
 };
