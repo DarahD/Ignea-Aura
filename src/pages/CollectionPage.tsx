@@ -171,6 +171,3 @@ const CollectionPage: React.FC = () => {
       {/* Your UI rendering logic goes here */}
     </div>
   );
-};
-
-export default CollectionPage;
