@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Star, ArrowRight } from 'lucide-react';
 
-// Force deploy
-
 const CollectionPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -38,9 +36,7 @@ const CollectionPage: React.FC = () => {
         'Natural coconut soy wax blend',
         'Crackling wood wick',
         'Phthalate-free fragrances'
-      ],
-      bundlePricing: '2 for 850 NOK | 3 for 1200 NOK',
-      afterBurn: 'After the burn, wash to reveal a sophisticated black rocks glass.'
+      ]
     },
     {
       id: 2,
@@ -56,9 +52,7 @@ const CollectionPage: React.FC = () => {
         'Natural coconut soy wax blend',
         'Crackling wood wick',
         'Phthalate-free fragrances'
-      ],
-      bundlePricing: '2 for 850 NOK | 3 for 1200 NOK',
-      afterBurn: 'After the burn, wash to reveal a classic clear rocks glass.'
+      ]
     },
     {
       id: 3,
@@ -74,9 +68,7 @@ const CollectionPage: React.FC = () => {
         'Natural coconut soy wax blend',
         'Crackling wood wick',
         'Phthalate-free fragrances'
-      ],
-      bundlePricing: '2 for 850 NOK | 3 for 1200 NOK',
-      afterBurn: 'After the burn, wash to reveal an elegant pink rocks glass.'
+      ]
     },
     {
       id: 4,
@@ -92,9 +84,7 @@ const CollectionPage: React.FC = () => {
         'Natural coconut soy wax blend',
         'Crackling wood wick',
         'Phthalate-free fragrances'
-      ],
-      bundlePricing: '2 for 850 NOK | 3 for 1200 NOK',
-      afterBurn: 'After the burn, wash to reveal a sophisticated black rocks glass.'
+      ]
     },
     {
       id: 5,
@@ -110,9 +100,7 @@ const CollectionPage: React.FC = () => {
         'Natural coconut soy wax blend',
         'Crackling wood wick',
         'Phthalate-free fragrances'
-      ],
-      bundlePricing: '2 for 850 NOK | 3 for 1200 NOK',
-      afterBurn: 'After the burn, wash to reveal a classic clear rocks glass.'
+      ]
     },
     {
       id: 6,
@@ -128,9 +116,7 @@ const CollectionPage: React.FC = () => {
         'Natural coconut soy wax blend',
         'Crackling wood wick',
         'Phthalate-free fragrances'
-      ],
-      bundlePricing: '2 for 850 NOK | 3 for 1200 NOK',
-      afterBurn: 'After the burn, wash to reveal an elegant pink rocks glass.'
+      ]
     },
     {
       id: 7,
@@ -168,6 +154,9 @@ const CollectionPage: React.FC = () => {
 
   return (
     <div>
-      {/* Your UI rendering logic goes here */}
+      {/* Content display will be added later */}
     </div>
   );
+};
+
+export default CollectionPage;
