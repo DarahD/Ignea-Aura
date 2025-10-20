@@ -154,7 +154,26 @@ const CollectionPage: React.FC = () => {
 
   return (
     <div>
-      {/* Content display will be added later */}
+      <h1>Our Collections</h1>
+      <p>Discover hand-crafted vessels and curated gift sets</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+        {products.map(product => (
+          <div key={product.id} className="border rounded-2xl p-4 shadow-md">
+            <img src={product.image} alt={product.name} className="w-full h-auto rounded-xl" />
+            <h2 className="text-xl font-bold mt-2">{product.name}</h2>
+            <p className="text-sm text-gray-600 mt-1">{product.description}</p>
+            <ul className="text-sm mt-2 list-disc list-inside">
+              {product.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
+            <p className="mt-2 font-semibold">{product.price} NOK / ${product.priceUSD}</p>
+            {product.afterBurn && (
+              <p className="text-sm italic text-gray-500 mt-1">{product.afterBurn}</p>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
