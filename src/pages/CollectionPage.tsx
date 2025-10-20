@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Star, ArrowRight } from 'lucide-react';
 
+// Force deploy
+
 const CollectionPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
