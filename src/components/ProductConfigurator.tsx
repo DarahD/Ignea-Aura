@@ -4,19 +4,20 @@ import { Check, ChevronRight, ImagePlus, Sparkles, Upload, X } from 'lucide-reac
 
 type Shape = 'round' | 'square';
 type Color = 'onyx' | 'crystal' | 'blush';
+type Finish = 'polished' | 'frosted';
 type ProductType = 'candle' | 'refill';
 type Engraving = 'none' | 'initials' | 'name' | 'artwork';
 
 const vesselImages: Record<Shape, Record<Color, string>> = {
   round: {
-    onyx: '/ignea-aura-web-pics/Products/onyx-round-glass.png',
-    crystal: '/ignea-aura-web-pics/Products/clear-round-glass.png',
-    blush: '/ignea-aura-web-pics/Products/pink-round-glass.png',
+    onyx: '/ignea-aura-web-pics/%20Products/onyx-round-glass.png',
+    crystal: '/ignea-aura-web-pics/%20Products/clear-round-glass.png',
+    blush: '/ignea-aura-web-pics/%20Products/pink-round-glass.png',
   },
   square: {
-    onyx: '/ignea-aura-web-pics/Products/onyx-square-glass.png',
-    crystal: '/ignea-aura-web-pics/Products/clear-square-glass.png',
-    blush: '/ignea-aura-web-pics/Products/pink-square-glass.png',
+    onyx: '/ignea-aura-web-pics/%20Products/Onyx-Square-glass.png',
+    crystal: '/ignea-aura-web-pics/%20Products/clear-square-glass.png',
+    blush: '/ignea-aura-web-pics/%20Products/pink-square-glass.png',
   },
 };
 
@@ -32,6 +33,7 @@ const engravingPricing: Record<Engraving, number> = {
 const ProductConfigurator: React.FC = () => {
   const [shape, setShape] = useState<Shape>('round');
   const [color, setColor] = useState<Color>('blush');
+  const [finish, setFinish] = useState<Finish>('polished');
   const [productType, setProductType] = useState<ProductType>('candle');
   const [scent, setScent] = useState(scents[0]);
   const [engraving, setEngraving] = useState<Engraving>('none');
@@ -76,7 +78,7 @@ const ProductConfigurator: React.FC = () => {
           </div>
           <h2 className="font-serif text-4xl leading-tight text-black md:text-6xl">Make it unmistakably yours.</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-black/65 md:text-lg">
-            Choose your vessel, candle or refill, fragrance and engraving. The experience updates as you build it.
+            Choose your vessel, finish, candle or refill, fragrance and engraving. The experience updates as you build it.
           </p>
         </div>
 
@@ -89,7 +91,7 @@ const ProductConfigurator: React.FC = () => {
             <div className="flex h-full min-h-[470px] items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={`${shape}-${color}-${productType}`}
+                  key={`${shape}-${color}-${finish}-${productType}`}
                   initial={{ opacity: 0, y: 20, scale: 0.96, rotateY: -10 }}
                   animate={{ opacity: 1, y: 0, scale: 1, rotateY: 0 }}
                   exit={{ opacity: 0, y: -15, scale: 0.97 }}
@@ -99,17 +101,17 @@ const ProductConfigurator: React.FC = () => {
                   <motion.img
                     src={vesselImages[shape][color]}
                     alt={`${color} ${shape} Ignea Aura vessel`}
-                    className="mx-auto max-h-[430px] w-full object-contain drop-shadow-[0_28px_22px_rgba(0,0,0,0.18)]"
+                    className={`mx-auto max-h-[430px] w-full object-contain drop-shadow-[0_28px_22px_rgba(0,0,0,0.18)] ${finish === 'frosted' ? 'opacity-80 saturate-75 brightness-110 contrast-75' : ''}`}
                     whileHover={{ scale: 1.025, rotate: shape === 'round' ? 1.2 : -0.7 }}
                     transition={{ type: 'spring', stiffness: 180, damping: 18 }}
                   />
 
+                  {finish === 'frosted' && (
+                    <div className="pointer-events-none absolute inset-[12%] rounded-[2rem] bg-white/10 backdrop-blur-[1px]" />
+                  )}
+
                   {engraving !== 'none' && personalization && engraving !== 'artwork' && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.72 }}
-                      className="pointer-events-none absolute left-1/2 top-[62%] -translate-x-1/2 text-center font-serif text-sm tracking-[0.16em] text-white mix-blend-difference md:text-base"
-                    >
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.72 }} className="pointer-events-none absolute left-1/2 top-[62%] -translate-x-1/2 text-center font-serif text-sm tracking-[0.16em] text-white mix-blend-difference md:text-base">
                       {personalization}
                     </motion.div>
                   )}
@@ -124,7 +126,7 @@ const ProductConfigurator: React.FC = () => {
             </div>
 
             <div className="mt-2 flex items-center justify-between border-t border-black/10 pt-5 text-sm text-black/55">
-              <span>{shape === 'round' ? 'Round rocks glass' : 'Square rocks glass'} · {color}</span>
+              <span>{shape === 'round' ? 'Round rocks glass' : 'Square rocks glass'} · {color} · {finish}</span>
               <span>{productType === 'candle' ? 'Coconut-soy candle' : 'Drop-in refill'}</span>
             </div>
           </div>
@@ -138,11 +140,7 @@ const ProductConfigurator: React.FC = () => {
               <OptionGroup number="02" title="Glass color">
                 <div className="grid grid-cols-3 gap-2">
                   {(['blush', 'crystal', 'onyx'] as Color[]).map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => setColor(item)}
-                      className={`group rounded-2xl border px-3 py-4 text-left transition ${color === item ? 'border-white bg-white text-black' : 'border-white/15 bg-white/[0.04] text-white hover:border-white/35'}`}
-                    >
+                    <button key={item} onClick={() => setColor(item)} className={`group rounded-2xl border px-3 py-4 text-left transition ${color === item ? 'border-white bg-white text-black' : 'border-white/15 bg-white/[0.04] text-white hover:border-white/35'}`}>
                       <span className={`mb-3 block h-7 w-7 rounded-full border ${item === 'blush' ? 'border-[#f4c6c3] bg-[#f4c6c3]' : item === 'crystal' ? 'border-white/60 bg-white/20' : 'border-white/20 bg-[#202020]'}`} />
                       <span className="text-sm capitalize">{item}</span>
                     </button>
@@ -150,31 +148,27 @@ const ProductConfigurator: React.FC = () => {
                 </div>
               </OptionGroup>
 
-              <OptionGroup number="03" title="What are you buying?">
+              <OptionGroup number="03" title="Glass finish">
+                <Segmented options={[['polished', 'Polished'], ['frosted', 'Frosted']]} value={finish} onChange={(v) => setFinish(v as Finish)} />
+                {finish === 'frosted' && <p className="mt-2 text-xs leading-5 text-white/40">Frosted is shown as a visual preview while final factory availability is being confirmed.</p>}
+              </OptionGroup>
+
+              <OptionGroup number="04" title="What are you buying?">
                 <Segmented options={[['candle', 'Complete candle'], ['refill', 'Refill only']]} value={productType} onChange={(v) => setProductType(v as ProductType)} />
               </OptionGroup>
 
               {productType === 'candle' && (
-                <OptionGroup number="04" title="Fragrance">
+                <OptionGroup number="05" title="Fragrance">
                   <select value={scent} onChange={(e) => setScent(e.target.value)} className="w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3.5 text-sm outline-none focus:border-white/40">
                     {scents.map((item) => <option key={item} className="bg-black">{item}</option>)}
                   </select>
                 </OptionGroup>
               )}
 
-              <OptionGroup number={productType === 'candle' ? '05' : '04'} title="Personalization">
+              <OptionGroup number={productType === 'candle' ? '06' : '05'} title="Personalization">
                 <div className="grid grid-cols-2 gap-2">
-                  {([
-                    ['none', 'None'],
-                    ['initials', 'Initials'],
-                    ['name', 'Name / phrase'],
-                    ['artwork', 'Upload artwork'],
-                  ] as [Engraving, string][]).map(([key, label]) => (
-                    <button
-                      key={key}
-                      onClick={() => setEngraving(key)}
-                      className={`rounded-2xl border px-3 py-3 text-left text-sm transition ${engraving === key ? 'border-[#f4c6c3] bg-[#f4c6c3] text-black' : 'border-white/15 bg-white/[0.04] hover:border-white/35'}`}
-                    >
+                  {([['none', 'None'], ['initials', 'Initials'], ['name', 'Name / phrase'], ['artwork', 'Upload artwork']] as [Engraving, string][]).map(([key, label]) => (
+                    <button key={key} onClick={() => setEngraving(key)} className={`rounded-2xl border px-3 py-3 text-left text-sm transition ${engraving === key ? 'border-[#f4c6c3] bg-[#f4c6c3] text-black' : 'border-white/15 bg-white/[0.04] hover:border-white/35'}`}>
                       <span className="flex items-center justify-between gap-2">{label}{engraving === key && <Check size={15} />}</span>
                     </button>
                   ))}
@@ -183,12 +177,7 @@ const ProductConfigurator: React.FC = () => {
                 <AnimatePresence>
                   {(engraving === 'initials' || engraving === 'name') && (
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                      <input
-                        value={personalization}
-                        onChange={(e) => setPersonalization(e.target.value.slice(0, engraving === 'initials' ? 4 : 24))}
-                        placeholder={engraving === 'initials' ? 'Enter initials' : 'Enter name or short phrase'}
-                        className="mt-3 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3.5 text-sm outline-none placeholder:text-white/35 focus:border-white/40"
-                      />
+                      <input value={personalization} onChange={(e) => setPersonalization(e.target.value.slice(0, engraving === 'initials' ? 4 : 24))} placeholder={engraving === 'initials' ? 'Enter initials' : 'Enter name or short phrase'} className="mt-3 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3.5 text-sm outline-none placeholder:text-white/35 focus:border-white/40" />
                     </motion.div>
                   )}
 
@@ -250,11 +239,7 @@ const OptionGroup: React.FC<{ number: string; title: string; children: React.Rea
 const Segmented: React.FC<{ options: [string, string][]; value: string; onChange: (value: string) => void }> = ({ options, value, onChange }) => (
   <div className="grid grid-cols-2 rounded-2xl border border-white/15 bg-white/[0.04] p-1">
     {options.map(([key, label]) => (
-      <button
-        key={key}
-        onClick={() => onChange(key)}
-        className={`rounded-xl px-3 py-2.5 text-sm transition ${value === key ? 'bg-white text-black shadow-sm' : 'text-white/65 hover:text-white'}`}
-      >
+      <button key={key} onClick={() => onChange(key)} className={`rounded-xl px-3 py-2.5 text-sm transition ${value === key ? 'bg-white text-black shadow-sm' : 'text-white/65 hover:text-white'}`}>
         {label}
       </button>
     ))}
