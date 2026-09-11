@@ -1,298 +1,159 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Users, Wine, Palette, MapPin, Clock, Calendar } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Building2, CalendarDays, Clock3, Flame, MapPin, PartyPopper, Sparkles, Users, Wine } from 'lucide-react';
+
+type ExperienceKey = 'atelier' | 'sip' | 'on-location';
 
 const ExperiencesPage: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [active, setActive] = useState<ExperienceKey>('atelier');
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setEmail('');
-    }, 3000);
-  };
-
-  const experiences = [
-    {
-      icon: Palette,
-      title: 'Design & Engrave',
-      description: 'Create your personalized Ignea Aura vessel with custom engravings'
+  const experiences = {
+    atelier: {
+      eyebrow: 'The full craft experience',
+      title: 'Candle Atelier',
+      subtitle: 'Slow down. Learn the craft. Make every step yours.',
+      description: 'Our most hands-on workshop. Each guest works from their own station, weighs wax, melts it in an individual burner, explores the fragrance library, creates a scent blend and pours their candle into a reusable Ignea Aura rocks glass.',
+      time: '2.5–3 hours',
+      group: 'Best for intimate groups',
+      image: '/EVENTPIC2.png',
+      bullets: ['Individual burner station', 'Weigh, melt, blend and pour your own wax', 'Explore and blend from the fragrance library', 'Personalized rocks glass to take home']
     },
-    {
-      icon: Wine,
-      title: 'Craft Cocktails',
-      description: 'Learn mixology from Oslo\'s finest bartenders'
+    sip: {
+      eyebrow: 'The social experience',
+      title: 'Sip & Scent',
+      subtitle: 'A candle-making night with less waiting and more mingling.',
+      description: 'A streamlined social format built for bars, restaurants and lively group nights. We arrive with hot wax ready in our large boiler. Guests choose a fragrance, measure their wax, blend, pour and personalize while enjoying cocktails or mocktails.',
+      time: '1.5–2 hours',
+      group: 'Ideal for social nights',
+      image: '/EXPERIENCE SHOT.png',
+      bullets: ['Hot wax prepared in our mobile boiler', 'Choose fragrance, measure, blend and pour', 'Perfect for bars, restaurants and date-night concepts', 'Fast, polished and highly social']
     },
-    {
-      icon: Users,
-      title: 'Connect & Create',
-      description: 'Share the experience with fellow creators in intimate settings'
+    'on-location': {
+      eyebrow: 'Mobile activations & partnerships',
+      title: 'Ignea Aura On Location',
+      subtitle: 'Bring the candle bar to your crowd.',
+      description: 'A flexible pop-up format for festivals, hotels, corporate events, brand activations and partner venues. We tailor the setup to the crowd, from quick fragrance-and-pour stations to fuller workshop moments.',
+      time: 'Custom format',
+      group: 'Built for larger audiences',
+      image: '/Firefly_Gemini Flash_Hyper-realistic, stylish photo of a luxury candle-making workshop. A diverse group of 746377.png',
+      bullets: ['Festivals and markets', 'Corporate and brand activations', 'Hotels, restaurants and venue partnerships', 'Private celebrations and community events']
     }
-  ];
+  } as const;
+
+  const current = experiences[active];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="pt-16"
-    >
-      {/* Hero */}
-      <section className="relative py-32 bg-gray-900 text-white overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('/Product-Collection IA (2).png')`,
-          }}
-        >
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Ignite Your Senses
-            </h1>
-            <h2 className="text-xl md:text-2xl text-pink-400 mb-8 font-light">
-              Choose Your Experience
-            </h2>
-            <p className="text-lg leading-relaxed max-w-2xl mx-auto">
-              From casual fun to premium craft, Ignea Aura offers two unique ways to make your mark.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <main className="bg-[#f7f2ec] text-black pt-14">
+      <section className="relative overflow-hidden px-4 pb-16 pt-20 md:px-8 md:pb-24 md:pt-28 lg:px-12">
+        <div className="pointer-events-none absolute left-1/2 top-[-18rem] h-[44rem] w-[44rem] -translate-x-1/2 rounded-full bg-[#f4c6c3]/30 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-black/45">Ignea Aura Experiences</p>
+          <h1 className="max-w-5xl font-serif text-5xl leading-[0.98] md:text-7xl lg:text-8xl">Choose how you want to experience the flame.</h1>
+          <p className="mt-7 max-w-3xl text-base leading-7 text-black/60 md:text-lg">Join one of our workshops, host a private gathering, or invite Ignea Aura into your venue, festival or brand event.</p>
 
-      {/* What's Included */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Premium Experience */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="bg-white p-8 rounded-2xl shadow-lg"
-            >
-              <div className="aspect-video overflow-hidden rounded-xl mb-6">
-                <img
-                  src="/EVENTPIC2.png"
-                  alt="Premium candle and cocktail class"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Candle & Cocktail Class</h3>
-              <p className="text-pink-400 font-medium mb-4">Premium Experience</p>
-              <p className="text-gray-600 mb-6">
-                Our premium experience combines artisanal candle-making with professional mixology. 
-                Learn, sip, and create something unforgettable.
-              </p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center text-sm text-gray-700">
-                  <Palette className="h-4 w-4 text-pink-400 mr-3" />
-                  Hands-on candle-making in a reusable Ignea Aura vessel
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <Wine className="h-4 w-4 text-pink-400 mr-3" />
-                  Cocktail-making session led by a professional mixologist
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <Users className="h-4 w-4 text-pink-400 mr-3" />
-                  Take-home engraved vessel
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <Clock className="h-4 w-4 text-pink-400 mr-3" />
-                  2.5–3 hours duration
-                </div>
-              </div>
-              
-              <div className="mb-6">
-                <p className="text-lg font-bold mb-2">950–1,200 NOK ($95–$120) per person</p>
-                <p className="text-sm text-gray-600">Group discount: 900 NOK ($90) per person (3+ attendees)</p>
-              </div>
-              
-              <button className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium">
-                Reserve Your Premium Experience
-              </button>
-            </motion.div>
-
-            {/* Mid-Tier Experience */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white p-8 rounded-2xl shadow-lg"
-            >
-              <div className="aspect-video overflow-hidden rounded-xl mb-6">
-                <img
-                  src="/EXPERIENCE SHOT.png"
-                  alt="Sip & Scent workshop"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Sip & Scent</h3>
-              <p className="text-pink-400 font-medium mb-4">Social Experience</p>
-              <p className="text-gray-600 mb-6">
-                A relaxed, social experience. Craft your own candle, enjoy a cocktail or mocktail, 
-                and take home your personalized vessel.
-              </p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center text-sm text-gray-700">
-                  <Palette className="h-4 w-4 text-pink-400 mr-3" />
-                  Candle-making session in a reusable vessel
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <Wine className="h-4 w-4 text-pink-400 mr-3" />
-                  Sip a curated cocktail or mocktail during class
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <Users className="h-4 w-4 text-pink-400 mr-3" />
-                  Take-home engraved vessel
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <Clock className="h-4 w-4 text-pink-400 mr-3" />
-                  1.5–2 hours duration
-                </div>
-              </div>
-              
-              <div className="mb-6">
-                <p className="text-lg font-bold mb-2">650 NOK ($65) per person</p>
-                <p className="text-sm text-gray-600">Group discount: 600 NOK ($60) per person (3+ attendees)</p>
-              </div>
-              
-              <button className="w-full bg-pink-400 text-black py-3 rounded-lg hover:bg-pink-300 transition-colors font-medium">
-                Join the Sip & Scent Waitlist
-              </button>
-            </motion.div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            {([
+              ['atelier', 'Candle Atelier'],
+              ['sip', 'Sip & Scent'],
+              ['on-location', 'On Location']
+            ] as [ExperienceKey, string][]).map(([key, label]) => (
+              <button key={key} onClick={() => setActive(key)} className={`rounded-full border px-5 py-3 text-sm transition ${active === key ? 'border-black bg-black text-white' : 'border-black/15 bg-white/70 hover:border-black/35'}`}>{label}</button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Experience Details */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl font-bold mb-8">What to Expect</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <Clock className="h-6 w-6 text-pink-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Duration</h4>
-                    <p className="text-gray-600">1.5–3 hours depending on experience level</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <MapPin className="h-6 w-6 text-pink-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Location</h4>
-                    <p className="text-gray-600">Premium venues and cozy spaces across Oslo</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <Users className="h-6 w-6 text-pink-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Group Size</h4>
-                    <p className="text-gray-600">Intimate groups with personalized attention</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <Calendar className="h-6 w-6 text-pink-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Schedule</h4>
-                    <p className="text-gray-600">Weekend sessions, private bookings available</p>
-                  </div>
-                </div>
+      <section className="px-4 pb-20 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#111] text-white shadow-[0_35px_100px_rgba(0,0,0,0.14)]">
+          <div className="grid lg:grid-cols-[1.05fr_.95fr]">
+            <div className="relative min-h-[520px] overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.img key={current.image} initial={{ opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45 }} src={current.image} alt={current.title} className="absolute inset-0 h-full w-full object-cover" />
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+              <div className="absolute bottom-7 left-7 right-7 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-white/75">
+                <span className="rounded-full border border-white/20 bg-black/25 px-3 py-2 backdrop-blur"><Clock3 size={13} className="mr-1.5 inline" />{current.time}</span>
+                <span className="rounded-full border border-white/20 bg-black/25 px-3 py-2 backdrop-blur"><Users size={13} className="mr-1.5 inline" />{current.group}</span>
               </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="aspect-square overflow-hidden rounded-2xl"
-            >
-              <img
-                src="/Firefly_Gemini Flash_Hyper-realistic, stylish photo of a luxury candle-making workshop. A diverse group of 746377.png"
-                alt="Workshop in progress"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
+            </div>
+
+            <div className="p-7 md:p-10 lg:p-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#f4c6c3]">{current.eyebrow}</p>
+              <h2 className="mt-3 font-serif text-4xl md:text-5xl">{current.title}</h2>
+              <p className="mt-3 text-lg text-white/75">{current.subtitle}</p>
+              <p className="mt-6 leading-7 text-white/60">{current.description}</p>
+
+              <div className="mt-8 space-y-3">
+                {current.bullets.map((item) => <div key={item} className="flex items-start gap-3 border-b border-white/10 pb-3 text-sm text-white/75"><Sparkles size={16} className="mt-0.5 shrink-0 text-[#f4c6c3]" />{item}</div>)}
+              </div>
+
+              <div className="mt-9 flex flex-wrap gap-3">
+                <button className="group flex items-center gap-2 rounded-full bg-[#f4c6c3] px-5 py-3 text-sm font-medium text-black transition hover:bg-white">Plan this experience <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></button>
+                <button className="rounded-full border border-white/20 px-5 py-3 text-sm text-white/80 transition hover:bg-white hover:text-black">Private group inquiry</button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Waitlist Signup */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold mb-6">Ready to Create?</h2>
-            <p className="text-gray-600 mb-8 text-lg">
-              Be among the first to experience our workshops when we launch in Oslo
-            </p>
+      <section className="px-4 py-18 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-7xl py-4">
+          <div className="mb-9 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-black/45">Three ways to work with us</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-5xl">From intimate tables to a festival crowd.</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            <PathCard icon={<Flame size={20} />} title="Attend a workshop" copy="Join a scheduled Candle Atelier or Sip & Scent experience." />
+            <PathCard icon={<PartyPopper size={20} />} title="Host a private event" copy="Birthdays, bridal events, team gatherings, social clubs and private celebrations." />
+            <PathCard icon={<Building2 size={20} />} title="Partner with Ignea Aura" copy="Bars, restaurants, hotels, festivals, corporate teams and brand activations." />
+          </div>
+        </div>
+      </section>
 
-            {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-4">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    className="flex-1 px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-pink-400 text-black px-6 py-3 rounded-lg hover:bg-pink-300 transition-colors font-medium whitespace-nowrap"
-                  >
-                    Join Waitlist
-                  </button>
-                </div>
+      <section className="px-4 py-20 md:px-8 lg:px-12">
+        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] border border-black/10 bg-white/65 shadow-[0_25px_80px_rgba(0,0,0,0.06)] backdrop-blur lg:grid-cols-[.9fr_1.1fr]">
+          <div className="bg-[#f2d8d4] p-7 md:p-10 lg:p-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-black/45">Bring Ignea Aura to your event</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-5xl">Have a venue, crowd or idea? Let’s build the right format.</h2>
+            <p className="mt-5 leading-7 text-black/60">Tell us what you are planning and we’ll shape the setup around your guest count, timing and venue. Full workshop, express candle bar or something in between.</p>
+            <div className="mt-8 space-y-4 text-sm text-black/65">
+              <p><MapPin size={16} className="mr-2 inline" />Venue partnerships & pop-ups</p>
+              <p><CalendarDays size={16} className="mr-2 inline" />One-night events or recurring activations</p>
+              <p><Wine size={16} className="mr-2 inline" />Perfect for bars, hotels and hospitality partners</p>
+            </div>
+          </div>
+
+          <div className="p-7 md:p-10 lg:p-12">
+            {!submitted ? (
+              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="grid gap-4 sm:grid-cols-2">
+                <input required placeholder="Your name" className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none focus:border-black/30" />
+                <input required type="email" placeholder="Email" className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none focus:border-black/30" />
+                <select className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none sm:col-span-2"><option>What are you planning?</option><option>Private workshop</option><option>Bar or restaurant event</option><option>Festival or market</option><option>Corporate or brand activation</option><option>Hotel or hospitality event</option><option>Something else</option></select>
+                <input placeholder="City / venue" className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none" />
+                <input placeholder="Approx. guest count" className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none" />
+                <input type="date" className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none" />
+                <select className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none"><option>Preferred format</option><option>Full Candle Atelier</option><option>Express Sip & Scent</option><option>Mobile candle bar</option><option>Not sure yet</option></select>
+                <textarea placeholder="Tell us about your event" rows={4} className="rounded-2xl border border-black/10 bg-white px-4 py-3.5 outline-none sm:col-span-2" />
+                <button className="group flex items-center justify-between rounded-full bg-black px-6 py-4 text-white sm:col-span-2">Send event inquiry <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" /></button>
+                <p className="text-xs leading-5 text-black/40 sm:col-span-2">Preview form only. We’ll connect this to your real inquiry workflow before launch.</p>
               </form>
             ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-center py-8"
-              >
-                <div className="text-green-500 mb-4 text-4xl">✓</div>
-                <h3 className="text-xl font-semibold mb-2">You're on the list!</h3>
-                <p className="text-gray-600">We'll notify you when workshops open in Oslo.</p>
-              </motion.div>
+              <div className="flex min-h-[360px] items-center justify-center text-center"><div><div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#f4c6c3]"><Sparkles size={20} /></div><h3 className="font-serif text-3xl">Beautiful. We have the idea.</h3><p className="mt-3 max-w-md text-black/55">This is still the Website 2.0 preview, so nothing was actually sent. The final version will route inquiries to Ignea Aura.</p><button onClick={() => setSubmitted(false)} className="mt-6 text-sm underline underline-offset-4">Back to the form</button></div></div>
             )}
-          </motion.div>
+          </div>
         </div>
       </section>
-    </motion.div>
+    </main>
   );
 };
+
+const PathCard: React.FC<{ icon: React.ReactNode; title: string; copy: string }> = ({ icon, title, copy }) => (
+  <motion.article whileHover={{ y: -5 }} className="rounded-[1.7rem] border border-black/10 bg-white/70 p-6 shadow-[0_18px_55px_rgba(0,0,0,0.04)]">
+    <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-full bg-[#f4c6c3]/60">{icon}</div>
+    <h3 className="font-serif text-2xl">{title}</h3>
+    <p className="mt-3 text-sm leading-6 text-black/55">{copy}</p>
+  </motion.article>
+);
 
 export default ExperiencesPage;
