@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import BioPage from './pages/BioPage';
 import CollectionPage from './pages/CollectionPage';
+import MakeItYoursPage from './pages/MakeItYoursPage';
 import SustainabilityPage from './pages/SustainabilityPage';
 import ExperiencesPage from './pages/ExperiencesPage';
 import ContactPage from './pages/ContactPage';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/bio" element={<BioPage />} />
             <Route path="/collection" element={<CollectionPage />} />
+            <Route path="/make-it-yours" element={<MakeItYoursPage />} />
             <Route path="/sustainability" element={<SustainabilityPage />} />
             <Route path="/experiences" element={<ExperiencesPage />} />
             <Route path="/contact" element={<ContactPage />} />
