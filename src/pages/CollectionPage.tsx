@@ -1,178 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Star, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const CollectionPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+const RAW = 'https://raw.githubusercontent.com/DarahD/Ignea-Aura/website-2.0/public/ignea-aura-web-pics/%20Products';
 
-  const products = [
-    {
-      id: 0,
-      name: 'The Keepsake Collection - Limited Edition Trilogy',
-      category: 'keepsake',
-      price: 1800,
-      priceUSD: 170,
-      image: '/ignea-aura-web-pics/%20Products/vessel-trio-reused-drinking-glass.png',
-      description: 'The ultimate Ignea Aura experience. This curated set of three Signature Vessels is presented in a reusable bamboo puzzle box.',
-      features: [
-        'Three hand-poured candles in reusable rocks glasses',
-        'Housed in an engraved, sustainable bamboo puzzle box',
-        'Choose pre-selected scent journey or mix-and-match colors',
-        'A true heirloom piece, embodying the spirit of renewal'
-      ],
-      isLimited: true
-    },
-    {
-      id: 1,
-      name: 'Onyx Round Vessel',
-      category: 'round',
-      price: 450,
-      priceUSD: 42,
-      image: '/ignea-aura-web-pics/%20Products/onyx-round-glass.png',
-      description: 'Embodying strength and mystery, the Onyx vessel holds a flame that glows with quiet resilience.',
-      features: [
-        '300–400 ml (10–13.5 oz) reusable rocks glass',
-        '~40+ hours burn time',
-        'Natural coconut soy wax blend',
-        'Crackling wood wick',
-        'Phthalate-free fragrances'
-      ]
-    },
-    {
-      id: 2,
-      name: 'Crystal Round Vessel',
-      category: 'round',
-      price: 450,
-      priceUSD: 42,
-      image: '/ignea-aura-web-pics/%20Products/clear-round-glass.png',
-      description: 'The Crystal vessel captures the pure, untamed beauty of the flame.',
-      features: [
-        '300–400 ml (10–13.5 oz) reusable rocks glass',
-        '~40+ hours burn time',
-        'Natural coconut soy wax blend',
-        'Crackling wood wick',
-        'Phthalate-free fragrances'
-      ]
-    },
-    {
-      id: 3,
-      name: 'Blush Round Vessel',
-      category: 'round',
-      price: 450,
-      priceUSD: 42,
-      image: '/ignea-aura-web-pics/%20Products/pink-round-glass.png',
-      description: 'Soft, modern, and inviting, the Blush vessel brings a touch of warm radiance to any space.',
-      features: [
-        '300–400 ml (10–13.5 oz) reusable rocks glass',
-        '~40+ hours burn time',
-        'Natural coconut soy wax blend',
-        'Crackling wood wick',
-        'Phthalate-free fragrances'
-      ]
-    },
-    {
-      id: 4,
-      name: 'Onyx Square Vessel',
-      category: 'square',
-      price: 450,
-      priceUSD: 42,
-      image: '/ignea-aura-web-pics/%20Products/Onyx-Square-glass.png',
-      description: 'Where bold geometry meets sustainable design.',
-      features: [
-        '300–400 ml (10–13.5 oz) reusable rocks glass',
-        '~40+ hours burn time',
-        'Natural coconut soy wax blend',
-        'Crackling wood wick',
-        'Phthalate-free fragrances'
-      ]
-    },
-    {
-      id: 5,
-      name: 'Crystal Square Vessel',
-      category: 'square',
-      price: 450,
-      priceUSD: 42,
-      image: '/ignea-aura-web-pics/%20Products/clear-square-glass.png',
-      description: 'Clean lines and clarity define the Crystal square vessel.',
-      features: [
-        '300–400 ml (10–13.5 oz) reusable rocks glass',
-        '~40+ hours burn time',
-        'Natural coconut soy wax blend',
-        'Crackling wood wick',
-        'Phthalate-free fragrances'
-      ]
-    },
-    {
-      id: 6,
-      name: 'Blush Square Vessel',
-      category: 'square',
-      price: 450,
-      priceUSD: 42,
-      image: '/ignea-aura-web-pics/%20Products/pink-square-glass.png',
-      description: 'The Blush square vessel offers a soft, contemporary edge.',
-      features: [
-        '300–400 ml (10–13.5 oz) reusable rocks glass',
-        '~40+ hours burn time',
-        'Natural coconut soy wax blend',
-        'Crackling wood wick',
-        'Phthalate-free fragrances'
-      ]
-    },
-    {
-      id: 7,
-      name: 'Refill Drop-Ins',
-      category: 'refills',
-      price: 280,
-      priceUSD: 26,
-      image: '/ignea-aura-web-pics/%20Products/studio-lifestyle-shot.png',
-      description: 'Coconut soy wax refills designed to drop directly into your Ignea Aura vessel.',
-      features: [
-        'Fits all vessels',
-        'Coconut soy wax blend',
-        'Crackling wood wick',
-        'Seasonal fragrances',
-        'Subscription from 220 NOK/month ($21)'
-      ]
-    },
-    {
-      id: 8,
-      name: 'Engraving Upgrade',
-      category: 'engraving',
-      price: 100,
-      priceUSD: 10,
-      image: 'https://images.pexels.com/photos/5691660/pexels-photo-5691660.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Personalize your vessel with engraving — monograms, initials, or subtle patterns.',
-      features: [
-        'Custom monograms & initials',
-        'Subtle patterns',
-        'Precision laser engraving',
-        '2+ glasses: +75 NOK ($7.50) each',
-        '3+ glasses: +50 NOK ($5) each'
-      ]
-    }
-  ];
+const products = [
+  { name: 'Onyx Round Vessel', price: 450, image: `${RAW}/onyx-round-glass.png`, note: 'Round rocks glass · Onyx' },
+  { name: 'Crystal Round Vessel', price: 450, image: `${RAW}/clear-round-glass.png`, note: 'Round rocks glass · Clear' },
+  { name: 'Blush Round Vessel', price: 450, image: `${RAW}/pink-round-glass.png`, note: 'Round rocks glass · Blush' },
+  { name: 'Onyx Square Vessel', price: 450, image: `${RAW}/Onyx-Square-glass.png`, note: 'Square rocks glass · Onyx' },
+  { name: 'Crystal Square Vessel', price: 450, image: `${RAW}/clear-square-glass.png`, note: 'Square rocks glass · Clear' },
+  { name: 'Blush Square Vessel', price: 450, image: `${RAW}/pink-square-glass.png`, note: 'Square rocks glass · Blush' },
+];
 
-  return (
-    <div>
-      <h1>Our Collections</h1>
-      <p>Discover hand-crafted vessels and curated gift sets</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-        {products.map(product => (
-          <div key={product.id} className="border rounded-2xl p-4 shadow-md">
-            <img src={product.image} alt={product.name} className="w-full h-auto rounded-xl" />
-            <h2 className="text-xl font-bold mt-2">{product.name}</h2>
-            <p className="text-sm text-gray-600 mt-1">{product.description}</p>
-            <ul className="text-sm mt-2 list-disc list-inside">
-              {product.features.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
-            </ul>
-            <p className="mt-2 font-semibold">{product.price} NOK / ${product.priceUSD}</p>
-          </div>
-        ))}
+const CollectionPage: React.FC = () => (
+  <main className="bg-[#faf7f3] pt-14 text-black">
+    <section className="px-4 pb-14 pt-20 md:px-8 md:pb-20 md:pt-28 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+        <p className="text-xs font-semibold uppercase tracking-[.3em] text-black/45">The Ignea Aura Collection</p>
+        <h1 className="mt-4 max-w-5xl text-5xl font-semibold leading-[.98] tracking-[-.045em] md:text-7xl lg:text-8xl">Designed to burn beautifully. Made to live beyond the flame.</h1>
+        <p className="mt-7 max-w-3xl text-base leading-7 text-black/60 md:text-lg">Luxury rocks glasses, hand-poured candles, drop-in refills and personalization designed around reuse.</p>
+        <div className="mt-9"><Link to="/make-it-yours" className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3.5 text-sm font-medium text-white">Make It Yours <ArrowRight size={16}/></Link></div>
       </div>
-    </div>
-  );
-};
+    </section>
+
+    <section className="px-4 pb-20 md:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-7 flex items-end justify-between gap-5"><div><p className="text-xs font-semibold uppercase tracking-[.24em] text-black/45">Core vessels</p><h2 className="mt-2 text-3xl font-semibold tracking-[-.03em] md:text-4xl">Round or square. Clear, blush or onyx.</h2></div><p className="hidden text-sm text-black/45 md:block">Frosted preview is available in Make It Yours.</p></div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product, index)=><motion.article key={product.name} initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:index*.05}} className="group overflow-hidden rounded-[1.7rem] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,.04)]"><div className="flex h-[360px] items-center justify-center bg-[#f4efe9] p-8"><img src={product.image} alt={product.name} className="max-h-[300px] w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"/></div><div className="p-6"><p className="text-xs uppercase tracking-[.18em] text-black/40">{product.note}</p><div className="mt-2 flex items-end justify-between gap-4"><h3 className="text-xl font-semibold tracking-[-.02em]">{product.name}</h3><p className="whitespace-nowrap text-sm font-semibold">{product.price} NOK</p></div><p className="mt-3 text-sm leading-6 text-black/55">Reusable heavyweight rocks glass with coconut-soy wax and wood wick.</p></div></motion.article>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="px-4 pb-24 md:px-8 lg:px-12"><div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] bg-[#111] text-white md:grid-cols-2"><div className="min-h-[420px]"><img src={`${RAW}/vessel-trio-reused-drinking-glass.png`} alt="Ignea Aura vessels reused as drinking glasses" className="h-full w-full object-cover"/></div><div className="flex items-center p-8 md:p-12"><div><p className="text-xs font-semibold uppercase tracking-[.25em] text-[#f4c6c3]">Legacy over landfill</p><h2 className="mt-3 text-4xl font-semibold tracking-[-.035em] md:text-5xl">A candle first. A rocks glass next.</h2><p className="mt-5 max-w-xl leading-7 text-white/60">When the candle is finished, refill it or return the vessel to the bar cart. The glass is meant to stay with you.</p></div></div></div></section>
+  </main>
+);
 
 export default CollectionPage;
